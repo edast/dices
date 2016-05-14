@@ -1,0 +1,11 @@
+version: '2'
+services:
+  node:
+    build: .
+    working_dir: /code
+    command: npm run server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/code
+

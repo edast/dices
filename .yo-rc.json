@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "dices",
+    "style": "less",
+    "postcss": true
+  }
+}
