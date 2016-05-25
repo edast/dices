@@ -3,7 +3,7 @@ React redux game for throwing dices
 
 can be run in docker container:
 ```
-docker-composer up
+docker-compose up
 ```
 
 or in common way:
