@@ -1,10 +1,6 @@
-import React, {
-  Component,
-  PropTypes
-  } from 'react';
-import { RaisedButton } from 'material-ui';
-import { RadioButton } from 'material-ui';
-import { RadioButtonGroup } from 'material-ui';
+import React, { Component } from 'react'
+import { RadioButton } from 'material-ui'
+import { RadioButtonGroup } from 'material-ui'
 import { connect } from 'react-redux'
 import setRules from '../actions/setRules'
 
@@ -17,53 +13,50 @@ const styles = {
     marginLeft: 16,
     width: 'auto'
   }
-};
+}
 
 const mapStateToProps = (state) => {
   return {
-    numOfDices: state.game.numOfDices
+    numOfDice: state.game['numOfDice'],
+    canChangeRules: state.game['canChangeRules']
   }
 }
 
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: () => {
-      dispatch(setRules({numOfDices: ownProps}))
-    },
     onChange: (node, data) => {
-      ownProps = data
+      dispatch(setRules({numOfDice: data}))
     }
   }
 }
 
+const diceOptions = [
+  {value: 1, label:'one'},
+  {value: 2, label:'two'},
+  {value: 3, label:'three'},
+  {value: 4, label:'four'}
+]
+
 class DiceSelector extends Component {
   render() {
     return (
-      <div>
-        <RadioButtonGroup name="shipName" style={styles.block} onChange={this.props.onChange}>
-          <RadioButton
-            value="1"
-            label="one"
-            style={styles.radioButton}
-          />
-          <RadioButton
-            value="2"
-            label="two"
-            style={styles.radioButton}
-          />
-          <RadioButton
-            value="3"
-            label="three"
-            style={styles.radioButton}
-          />
-          <RadioButton
-            value="4"
-            label="four"
-            style={styles.radioButton}
-          />
+      <div >
+        <RadioButtonGroup
+          name='shipName'
+          style={styles.block}
+          onChange={this.props.onChange}
+          defaultSelected={this.props.numOfDice}
+        >
+          {diceOptions.map(opt =>
+            <RadioButton
+              value={opt.value}
+              label={opt.label}
+              style={styles.radioButton}
+              disabled={!this.props.canChangeRules}
+            />
+          )}
         </RadioButtonGroup>
-        <RaisedButton label="ok" primary={true} onClick={this.props.onClick} />
       </div>
     );
   }
@@ -72,4 +65,4 @@ class DiceSelector extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DiceSelector);
+)(DiceSelector)

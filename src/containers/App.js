@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import Main from '../components/Main';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+require ('../css/flexboxgrid.min.css')
+
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
   getChildContext() {
@@ -20,13 +22,7 @@ class App extends Component {
   }
   render() {
     const {actions, user, game} = this.props;
-    return (
-      <Main
-        actions={actions}
-        user={user}
-        game={game}
-        />
-    );
+    return <Main actions={actions} user={user} game={game}/>;
   }
 }
 App.childContextTypes = {
@@ -55,9 +51,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
   const actions = {
-    rollDices: require('../actions/rollDices.js'),
+    rollTheDice: require('../actions/rollTheDice.js'),
     setRules: require('../actions/setRules.js'),
-    setName: require('../actions/setName.js')
+    setName: require('../actions/setName.js'),
+    diceWasCast: require('../actions/diceWasCast.js')
   };
   const actionMap = { actions: bindActionCreators(actions, dispatch) };
   return actionMap;

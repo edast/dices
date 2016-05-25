@@ -1,7 +1,7 @@
 import expect from 'expect'
 import * as types from '../../src/actions/const'
 import setName from '../../src/actions/setName'
-import rollDices from '../../src/actions/rollDices'
+import rollTheDice from '../../src/actions/rollTheDice'
 import setRules from '../../src/actions/setRules'
 
 describe('actions', () => {
@@ -12,14 +12,14 @@ describe('actions', () => {
       name
     }
     expect(setName(name)).toEqual(expectedAction)
-  });
+  })
 
   it('should create an action to roll dices', () => {
     const expectedAction = {
-      type: types.ROLL_DICES
+      type: types.ROLL_THE_DICE
     }
-    expect(rollDices()).toEqual(expectedAction)
-  });
+    expect(rollTheDice()).toEqual(expectedAction)
+  })
 
   it('should create an action to set rules', () => {
     const rules = {
@@ -30,6 +30,6 @@ describe('actions', () => {
       rules
     }
     expect(setRules(rules)).toEqual(expectedAction)
-  });
+  })
 
 })

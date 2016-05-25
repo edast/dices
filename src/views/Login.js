@@ -1,6 +1,5 @@
 import React, {
-  Component,
-  PropTypes
+  Component
   } from 'react';
 import { connect } from 'react-redux'
 import setName from '../actions/setName'
@@ -32,23 +31,29 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class Login extends Component {
   render() {
     return (
-      <Paper zDepth={1}>
-        <Card>
-          <CardHeader
-            title="who are you?"
-          />
-          <CardText>
-            <TextField
-              hintText="your name"
-              onChange={this.props.onTextChange}
-            />
-            <FlatButton
-              label="Let's play" primary={true}
-              onClick={this.props.onClick}
-            />
-          </CardText>
-        </Card>
-      </Paper>
+      <div className="row center-xs middle-xs fullHeight">
+        <div className="col-xs-10 col-md-6 col-lg-4">
+          <div className="box">
+            <Paper zDepth={1}>
+              <Card>
+                <CardHeader
+                  title="who are you?"
+                />
+                <CardText>
+                  <TextField
+                    hintText="your name"
+                    onChange={this.props.onTextChange}
+                  />
+                  <FlatButton
+                    label="Let's play" primary={true}
+                    onClick={this.props.onClick}
+                  />
+                </CardText>
+              </Card>
+            </Paper>
+          </div>
+        </div>
+      </div>
     );
   }
 }

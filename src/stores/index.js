@@ -1,9 +1,8 @@
-const redux = require('redux');
-const reducers = require('../reducers');
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise';
-import createLogger from 'redux-logger';
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
+import promise from 'redux-promise'
+import createLogger from 'redux-logger'
+const reducers = require('../reducers')
 
 
 module.exports = function(initialState, middleware) {
@@ -14,7 +13,7 @@ module.exports = function(initialState, middleware) {
     reducers,
     initialState,
     applyMiddleware(...middlewares)
-  );
+  )
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

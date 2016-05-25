@@ -1,10 +1,9 @@
-import {SET_RULES} from '../actions/const';
-import {ROLL_DICES} from '../actions/const';
+import * as actions from '../actions/const';
 import _ from 'lodash';
 
 const initialState = {
-  numOfDices: 2,
-  rolledDices: []
+  numOfDice: 2,
+  rolledDice: []
 };
 
 module.exports = function(state = initialState, action) {
@@ -13,35 +12,50 @@ module.exports = function(state = initialState, action) {
 
   switch(action.type) {
     case 'rules':
-    case SET_RULES: {
-      let nextState = state;
-      if (action && action.rules && action.rules.numOfDices) {
-        if (_.inRange(action.rules.numOfDices, 1, 5)) {
-          nextState = { ...state, numOfDices: action.rules.numOfDices }
-        }
+    case actions.SET_RULES: {
+      let nextState = state
+      if (action.rules && action.rules['numOfDice']) {
+        nextState = _.assign(
+          {}, state, _.pick(action.rules, ['canChangeRules', 'canCastDice', 'numOfDice'])
+        )
       }
-      return nextState;
-    } break;
+      return nextState
+    }
 
-    case ROLL_DICES: {
+    case actions.ROLL_THE_DICE: {
       // here we should post to our server
-      let nextState = state;
-      const rolledDices = Array.from(
-        { length: state.numOfDices },
+      let nextState = state
+      const rolledDice = Array.from(
+        { length: state.numOfDice },
         () => _.random(1, 6)
-      );
-      nextState = { ...state, rolledDices }
-      return nextState;
-    } break;
-    /*
-    case 'YOUR_ACTION': {
-      // Modify next state depending on the action and return it
-      return nextState;
-    } break;
-    */
+      )
+      nextState = { ...state, rolledDice }
+      return nextState
+    }
+
+    case actions.DICE_WAS_CAST: {
+      let nextState = state
+      let castDice = action.castDice
+      nextState = { ...state, castDice }
+      return nextState
+    }
+
+    case actions.END_GAME: {
+      let nextState = state
+      let castDice = state.castDice.map((cd) => {
+        if (action.winner.user.id === cd.user.id) {
+          return {...cd, winner: true}
+        } else {
+          return {...cd, looser: true}
+        }
+      })
+      nextState = { ...state, castDice, lastWinner: action.winner }
+      return nextState
+    }
+
     default: {
       /* Return original state if no actions were consumed. */
-      return state;
+      return state
     }
   }
 }

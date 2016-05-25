@@ -1,4 +1,4 @@
-import {SET_NAME} from '../actions/const';
+import * as actions from '../actions/const'
 import _ from 'lodash'
 
 /* Define your initial state here.
@@ -15,7 +15,7 @@ module.exports = function(state = initialState, action) {
   //let nextState = Object.assign({}, state);
   switch(action.type) {
     case 'set_name':
-    case SET_NAME: {
+    case actions.SET_NAME: {
       let nextState = state;
       if (action && !_.isEmpty(_.trim(action.name))) {
         nextState = { ...state, name: action.name }

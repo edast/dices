@@ -8,22 +8,15 @@ import io from 'socket.io-client'
 import createSocketIoMiddleware from 'redux-socket.io'
 
 const socket = io()
-let socketIoMiddleware = createSocketIoMiddleware(socket, "server/")
+let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/')
 
 injectTapEventPlugin();
 const store = configureStore({}, socketIoMiddleware);
+window.store = store
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('app')
-);
-
-
-socket.on('connect', function () {
-  console.log('connected');
-});
-socket.on('news', function (data) {
-  console.log(data);
-});
+)

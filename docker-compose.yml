@@ -3,7 +3,7 @@ services:
   node:
     build: .
     working_dir: /code
-    command: npm run server
+    command: npm run server -- --port 8000 -v
     ports:
       - "8000:8000"
     volumes:
