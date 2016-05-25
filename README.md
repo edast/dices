@@ -1,14 +1,19 @@
 # dices
-React redux game for throwing dices
+React redux game for throwing dices. Uses websockets for comunication with server.
 
-can be run in docker container:
+first, install npm assets:
+```
+npm install
+```
+
+then you can run it in docker container:
 ```
 docker-compose up
 ```
 
 or in common way:
 ```
-npm install && npm run dist && npm run server -- --port 8000
+npm run test && npm run dist && npm run server -- --port 8000
 ```
 
 if you want to see more information - i.e. state changes run with -v 
